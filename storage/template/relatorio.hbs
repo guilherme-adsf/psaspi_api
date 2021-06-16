@@ -1,0 +1,2056 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style type="text/css">
+    .tg {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    .tg td {
+      border-color: black;
+      border-style: solid;
+      border-width: 1px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      overflow: hidden;
+      padding: 10px 5px;
+      word-break: normal;
+    }
+
+    .tg th {
+      border-color: black;
+      border-style: solid;
+      border-width: 1px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      font-weight: normal;
+      overflow: hidden;
+      padding: 10px 5px;
+      word-break: normal;
+    }
+
+    .tg .tg-baqh {
+      border-color: inherit;
+      text-align: center;
+      vertical-align: top;
+    }
+
+    .tg .tg-0lax {
+      border-color: inherit;
+      text-align: center;
+      vertical-align: top;
+    }
+
+    .tg .tg-c3ow {
+      border-color: inherit;
+      text-align: center;
+      vertical-align: top;
+    }
+
+    .tg .tg-0pky {
+      border-color: inherit;
+      text-align: center;
+      vertical-align: top;
+    }
+
+    .marginTop {
+      margin-top: 10px;
+    }
+
+    p {
+      margin-bottom: 8px;
+    }
+
+    .tg .tg-nrix {
+      border-color: inherit;
+      text-align: center;
+      vertical-align: middle;
+    }
+  </style>
+
+  <body>
+    <p style="padding-top: 20px; padding-bottom: 20px">
+      Observação: Neste documento o separador de milhar é a virgula e o
+      separador decimal é o ponto
+    </p>
+    <p>Perfil: {{profileId}}</p>
+    <p>Tweets Coletados: {{numberOfTweets}}</p>
+    <p>Número de Seguidores: {{numberOfFollowers}}</p>
+    <br />
+    <p>* Dados rotulados por sentimento</p>
+    <table class="tg">
+      <thead>
+        <tr>
+          <th class="tg-baqh">Sentimento</th>
+          <th class="tg-baqh">Frequência</th>
+          <th class="tg-baqh">Média de L</th>
+          <th class="tg-baqh">Max L</th>
+          <th class="tg-baqh">Média de Rt</th>
+          <th class="tg-baqh">Max Rt</th>
+          <th class="tg-baqh">Média de RtK</th>
+          <th class="tg-baqh">Max Rtk</th>
+          <th class="tg-baqh">Média de K</th>
+          <th class="tg-baqh">Max K</th>
+          <th class="tg-baqh">Média das Médias</th>
+          <th class="tg-baqh">Mob. Ef. do Sentimento</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tg-baqh">Positivo</td>
+          <td class="tg-0lax">{{positiveFreq}}</td>
+          <td class="tg-0lax">{{positiveAverageLikes}}</td>
+          <td class="tg-0lax">{{positiveMaxLikes}}</td>
+          <td class="tg-0lax">{{positiveAverageRetweets}}</td>
+          <td class="tg-0lax">{{positiveMaxRetweets}}</td>
+          <td class="tg-0lax">{{positiveAverageRetweetsWithComments}}</td>
+          <td class="tg-0lax">{{positiveMaxRetweetsWithComments}}</td>
+          <td class="tg-0lax">{{positiveAverageComments}}</td>
+          <td class="tg-0lax">{{positiveMaxComments}}</td>
+          <td class="tg-0lax">{{positiveAverageOfAverage}}</td>
+          <td class="tg-0lax">{{positiveMobEfetive}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">Neutro</td>
+          <td class="tg-0lax">{{neutralFreq}}</td>
+          <td class="tg-0lax">{{neutralAverageLikes}}</td>
+          <td class="tg-0lax">{{neutralMaxLikes}}</td>
+          <td class="tg-0lax">{{neutralAverageRetweets}}</td>
+          <td class="tg-0lax">{{neutralMaxRetweets}}</td>
+          <td class="tg-0lax">{{neutralAverageRetweetsWithComments}}</td>
+          <td class="tg-0lax">{{neutralMaxRetweetsWithComments}}</td>
+          <td class="tg-0lax">{{neutralAverageComments}}</td>
+          <td class="tg-0lax">{{neutralMaxComments}}</td>
+          <td class="tg-0lax">{{neutralAverageOfAverage}}</td>
+          <td class="tg-0lax">{{neutralMobEfetive}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">Negativo</td>
+          <td class="tg-0lax">{{negativeFreq}}</td>
+          <td class="tg-0lax">{{negativeAverageLikes}}</td>
+          <td class="tg-0lax">{{negativeMaxLikes}}</td>
+          <td class="tg-0lax">{{negativeAverageRetweets}}</td>
+          <td class="tg-0lax">{{negativeMaxRetweets}}</td>
+          <td class="tg-0lax">{{negativeAverageRetweetsWithComments}}</td>
+          <td class="tg-0lax">{{negativeMaxRetweetsWithComments}}</td>
+          <td class="tg-0lax">{{negativeAverageComments}}</td>
+          <td class="tg-0lax">{{negativeMaxComments}}</td>
+          <td class="tg-0lax">{{negativeAverageOfAverage}}</td>
+          <td class="tg-0lax">{{negativeMobEfetive}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">Não Classificado</td>
+          <td class="tg-0lax">{{unclassifiedFreq}}</td>
+          <td class="tg-0lax">{{unclassifiedAverageLikes}}</td>
+          <td class="tg-0lax">{{unclassifiedMaxLikes}}</td>
+          <td class="tg-0lax">{{unclassifiedAverageRetweets}}</td>
+          <td class="tg-0lax">{{unclassifiedMaxRetweets}}</td>
+          <td class="tg-0lax">{{unclassifiedAverageRetweetsWithComments}}</td>
+          <td class="tg-0lax">{{unclassifiedMaxRetweetsWithComments}}</td>
+          <td class="tg-0lax">{{unclassifiedAverageComments}}</td>
+          <td class="tg-0lax">{{unclassifiedMaxComments}}</td>
+          <td class="tg-0lax">{{unclassifiedAverageOfAverage}}</td>
+          <td class="tg-0lax">{{unclassifiedMobEfetive}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">Soma</td>
+          <td class="tg-0lax">{{sumFreq}}</td>
+          <td class="tg-0lax">{{sumAverageLikes}}</td>
+          <td class="tg-0lax">{{sumMaxLikes}}</td>
+          <td class="tg-0lax">{{sumAverageRetweets}}</td>
+          <td class="tg-0lax">{{sumMaxRetweets}}</td>
+          <td class="tg-0lax">{{sumAverageRetweetsWithComments}}</td>
+          <td class="tg-0lax">{{sumMaxRetweetsWithComments}}</td>
+          <td class="tg-0lax">{{sumAverageComments}}</td>
+          <td class="tg-0lax">{{sumMaxComments}}</td>
+          <td class="tg-0lax">{{sumAverageOfAverage}}</td>
+          <td class="tg-0lax">{{sumMobEfetive}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>* Dados rotulados pela sequência GSP</p>
+    <table class="tg marginTop">
+      <thead>
+        <tr>
+          <th class="tg-c3ow">Sequência GSP<br /></th>
+          <th class="tg-c3ow">Frequência</th>
+          <th class="tg-c3ow">Média de L</th>
+          <th class="tg-c3ow">Máximo de L</th>
+          <th class="tg-c3ow">Média Rt</th>
+          <th class="tg-c3ow">Máximo de Rt</th>
+          <th class="tg-c3ow">Média de RtK</th>
+          <th class="tg-c3ow">Máximo de RtK</th>
+          <th class="tg-c3ow">Média de K</th>
+          <th class="tg-c3ow">Máximo de K</th>
+          <th class="tg-c3ow">Média das Médias</th>
+          <th class="tg-c3ow">Mob. Ef. da Sequencia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tg-c3ow">!L !Rt !Rtk !K</td>
+          <td class="tg-c3ow">{{sumFreqNL_NRt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageLikesNL_NRt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxLikesNL_NRt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsNL_NRt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsNL_NRt_NRtk_NK}}</td>
+          <td class="tg-c3ow">
+            {{sumAverageRetweetsWithCommentsNL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-c3ow">{{sumMaxRetweetsWithCommentsNL_NRt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageCommentsNL_NRt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxCommentsNL_NRt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{averageOfAverageNL_NRt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{mobEfetiveNL_NRt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-c3ow">!L !Rt !Rtk K</td>
+          <td class="tg-c3ow">{{sumFreqNL_NRt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageLikesNL_NRt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxLikesNL_NRt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsNL_NRt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsNL_NRt_NRtk_K}}</td>
+          <td class="tg-c3ow">
+            {{sumAverageRetweetsWithCommentsNL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-c3ow">{{sumMaxRetweetsWithCommentsNL_NRt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageCommentsNL_NRt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxCommentsNL_NRt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{averageOfAverageNL_NRt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{mobEfetiveNL_NRt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-c3ow">!L !Rt Rtk !K</td>
+          <td class="tg-c3ow">{{sumFreqNL_NRt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageLikesNL_NRt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxLikesNL_NRt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsNL_NRt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsNL_NRt_Rtk_NK}}</td>
+          <td class="tg-c3ow">
+            {{sumAverageRetweetsWithCommentsNL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-c3ow">{{sumMaxRetweetsWithCommentsNL_NRt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageCommentsNL_NRt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxCommentsNL_NRt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{averageOfAverageNL_NRt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{mobEfetiveNL_NRt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-c3ow">!L Rt !Rtk !K</td>
+          <td class="tg-c3ow">{{sumFreqNL_Rt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageLikesNL_Rt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxLikesNL_Rt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsNL_Rt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsNL_Rt_NRtk_NK}}</td>
+          <td class="tg-c3ow">
+            {{sumAverageRetweetsWithCommentsNL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-c3ow">{{sumMaxRetweetsWithCommentsNL_Rt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageCommentsNL_Rt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxCommentsNL_Rt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{averageOfAverageNL_Rt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{mobEfetiveNL_Rt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-c3ow">L !Rt !Rtk !K</td>
+          <td class="tg-c3ow">{{sumFreqL_NRt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageLikesL_NRt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxLikesL_NRt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsL_NRt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsL_NRt_NRtk_NK}}</td>
+          <td class="tg-c3ow">
+            {{sumAverageRetweetsWithCommentsL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-c3ow">{{sumMaxRetweetsWithCommentsL_NRt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageCommentsL_NRt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxCommentsL_NRt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{averageOfAverageL_NRt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{mobEfetiveL_NRt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-c3ow">!L !Rt Rtk K</td>
+          <td class="tg-c3ow">{{sumFreqNL_NRt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageLikesNL_NRt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxLikesNL_NRt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsNL_NRt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsNL_NRt_Rtk_K}}</td>
+          <td class="tg-c3ow">
+            {{sumAverageRetweetsWithCommentsNL_NRt_Rtk_K}}
+          </td>
+          <td class="tg-c3ow">{{sumMaxRetweetsWithCommentsNL_NRt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageCommentsNL_NRt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxCommentsNL_NRt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{averageOfAverageNL_NRt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{mobEfetiveNL_NRt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-c3ow">!L Rt !Rtk K</td>
+          <td class="tg-c3ow">{{sumFreqNL_Rt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageLikesNL_Rt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxLikesNL_Rt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsNL_Rt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsNL_Rt_NRtk_K}}</td>
+          <td class="tg-c3ow">
+            {{sumAverageRetweetsWithCommentsNL_Rt_NRtk_K}}
+          </td>
+          <td class="tg-c3ow">{{sumMaxRetweetsWithCommentsNL_Rt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageCommentsNL_Rt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxCommentsNL_Rt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{averageOfAverageNL_Rt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{mobEfetiveNL_Rt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-c3ow">L !Rt !Rtk K</td>
+          <td class="tg-c3ow">{{sumFreqL_NRt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageLikesL_NRt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxLikesL_NRt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsL_NRt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsL_NRt_NRtk_K}}</td>
+          <td class="tg-c3ow">
+            {{sumAverageRetweetsWithCommentsL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-c3ow">{{sumMaxRetweetsWithCommentsL_NRt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageCommentsL_NRt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxCommentsL_NRt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{averageOfAverageL_NRt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{mobEfetiveL_NRt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-c3ow">!L Rt Rtk !K</td>
+          <td class="tg-c3ow">{{sumFreqNL_Rt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageLikesNL_Rt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxLikesNL_Rt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsNL_Rt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsNL_Rt_Rtk_NK}}</td>
+          <td class="tg-c3ow">
+            {{sumAverageRetweetsWithCommentsNL_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-c3ow">{{sumMaxRetweetsWithCommentsNL_Rt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageCommentsNL_Rt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxCommentsNL_Rt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{averageOfAverageNL_Rt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{mobEfetiveNL_Rt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-c3ow">L !Rt Rtk !K</td>
+          <td class="tg-c3ow">{{sumFreqL_NRt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageLikesL_NRt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxLikesL_NRt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsL_NRt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsL_NRt_Rtk_NK}}</td>
+          <td class="tg-c3ow">
+            {{sumAverageRetweetsWithCommentsL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-c3ow">{{sumMaxRetweetsWithCommentsL_NRt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageCommentsL_NRt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxCommentsL_NRt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{averageOfAverageL_NRt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{mobEfetiveL_NRt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-c3ow">L Rt !Rtk !K</td>
+          <td class="tg-c3ow">{{sumFreqL_Rt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageLikesL_Rt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxLikesL_Rt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsL_Rt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsL_Rt_NRtk_NK}}</td>
+          <td class="tg-c3ow">
+            {{sumAverageRetweetsWithCommentsL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-c3ow">{{sumMaxRetweetsWithCommentsL_Rt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageCommentsL_Rt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxCommentsL_Rt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{averageOfAverageL_Rt_NRtk_NK}}</td>
+          <td class="tg-c3ow">{{mobEfetiveL_Rt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-c3ow">L Rt Rtk !K</td>
+          <td class="tg-c3ow">{{sumFreqL_Rt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageLikesL_Rt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxLikesL_Rt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsL_Rt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsL_Rt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsWithCommentsL_Rt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsWithCommentsL_Rt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumAverageCommentsL_Rt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{sumMaxCommentsL_Rt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{averageOfAverageL_Rt_Rtk_NK}}</td>
+          <td class="tg-c3ow">{{mobEfetiveL_Rt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-c3ow">!L Rt Rtk K</td>
+          <td class="tg-c3ow">{{sumFreqNL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageLikesNL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxLikesNL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsNL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsNL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsWithCommentsNL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsWithCommentsNL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageCommentsNL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxCommentsNL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{averageOfAverageNL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{mobEfetiveNL_Rt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-c3ow">L Rt !Rtk K</td>
+          <td class="tg-c3ow">{{sumFreqL_Rt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageLikesL_Rt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxLikesL_Rt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsL_Rt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsL_Rt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsWithCommentsL_Rt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxReweetsWithCommentsL_Rt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageCommentsL_Rt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxCommentsL_Rt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{averageOfAverageL_Rt_NRtk_K}}</td>
+          <td class="tg-c3ow">{{mobEfetiveL_Rt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-c3ow">L !Rt Rtk K</td>
+          <td class="tg-c3ow">{{sumFreqL_NRt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageLikesL_NRt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxLikesL_NRt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsL_NRt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsL_NRt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsWithCommentsL_NRt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsWithCommentsL_NRt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageCommentsL_NRt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxCommentsL_NRt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{averageOfAverageL_NRt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{mobEfetiveL_NRt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-c3ow">L Rt Rtk K</td>
+          <td class="tg-c3ow">{{sumFreqL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageLikesL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxLikesL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageRetweetsWithCommentsL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxRetweetsWithCommentsL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumAverageCommentsL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{sumMaxCommentsL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{averageOfAverageL_Rt_Rtk_K}}</td>
+          <td class="tg-c3ow">{{mobEfetiveL_Rt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-c3ow">Soma</td>
+          <td class="tg-c3ow">{{sumGspFreq}}</td>
+          <td class="tg-c3ow">{{sumGspAverageLikes}}</td>
+          <td class="tg-c3ow">{{sumGspMaxLikes}}</td>
+          <td class="tg-c3ow">{{sumGspAverageRetweets}}</td>
+          <td class="tg-c3ow">{{sumGspMaxRetweets}}</td>
+          <td class="tg-c3ow">{{sumGspAverageRetweetsWithComments}}</td>
+          <td class="tg-c3ow">{{sumGspMaxRetweetsWithComments}}</td>
+          <td class="tg-c3ow">{{sumGspAverageComments}}</td>
+          <td class="tg-c3ow">{{sumGspMaxComments}}</td>
+          <td class="tg-c3ow">{{sumGspAverageOfAverage}}</td>
+          <td class="tg-c3ow">{{sumGspMobEfetive}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <p>* Resultado da Apuração do Capital Social Bourdieusiano</p>
+    <table class="tg">
+      <thead>
+        <tr>
+          <th class="tg-0lax">Perfil</th>
+          <th class="tg-0lax">Número de interações sociais capturadas</th>
+          <th class="tg-0lax">Número de Seguidores</th>
+          <th class="tg-0lax">Indicador Mob Ef.</th>
+          <th class="tg-0lax">Capacidade Mob Ef.</th>
+          <th class="tg-0lax">vCSB</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tg-0lax">@{{profileId}}</td>
+          <td class="tg-0lax">{{numCollectedTweets}}</td>
+          <td class="tg-0lax">{{followers}}</td>
+          <td class="tg-0lax">{{sumIndGspCapability}}</td>
+          <td class="tg-0lax">{{sumGspCapability}}</td>
+          <td class="tg-0lax">{{sumCapitalSocialBourdiesian}}</td>
+        </tr>
+      </tbody>
+    </table> -->
+    <p>* Dados rotulados por Sentimento Positivo e Sequência</p>
+    <table class="tg marginTop">
+      <thead>
+        <tr>
+          <th class="tg-baqh">Sentimento<br /></th>
+          <th class="tg-baqh">Sequência</th>
+          <th class="tg-baqh">Frequência</th>
+          <th class="tg-baqh">Média de L</th>
+          <th class="tg-baqh">Máximo de L</th>
+          <th class="tg-baqh">Média de Rt</th>
+          <th class="tg-baqh">Máximo de Rt</th>
+          <th class="tg-baqh">Média de Rtk</th>
+          <th class="tg-baqh">Máximo de RtK</th>
+          <th class="tg-baqh">Média de K</th>
+          <th class="tg-baqh">Máximo de K</th>
+          <th class="tg-baqh">Média das Médias</th>
+          <th class="tg-baqh">Mob. Ef. da Sequencia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tg-nrix" rowspan="16">Positivo</td>
+          <td class="tg-baqh">!L !Rt !Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_positive_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_positive_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesPositive_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_positive_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsPositive_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_positive_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsPositive_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_positive_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsPositive_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sumAverageOfAveragePositive_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMobEfetivePositive_NL_NRt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L !Rt !Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_positive_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_positive_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesPositive_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_positive_NL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsPositive_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_positive_NL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsPositive_NL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_positive_NL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsPositive_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAveragePositive_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetivePositive_NL_NRt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L !Rt Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_positive_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_positive_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesPositive_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_positive_NL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsPositive_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_positive_NL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsPositive_NL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_positive_NL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsPositive_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAveragePositive_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetivePositive_NL_NRt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L Rt !Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_positive_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_positive_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesPositive_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_positive_NL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsPositive_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_positive_NL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsPositive_NL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_positive_NL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsPositive_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAveragePositive_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetivePositive_NL_Rt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L !Rt !Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_positive_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_positive_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesPositive_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_positive_L_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsPositive_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_positive_L_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsPositive_L_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_positive_L_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsPositive_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAveragePositive_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetivePositive_L_NRt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L !Rt Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_positive_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_positive_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesPositive_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_positive_NL_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsPositive_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_positive_NL_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsPositive_NL_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_positive_NL_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsPositive_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAveragePositive_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetivePositive_NL_NRt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L Rt !Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_positive_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_positive_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesPositive_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_positive_NL_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsPositive_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_positive_NL_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsPositive_NL_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_positive_NL_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsPositive_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAveragePositive_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetivePositive_NL_Rt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L !Rt !Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_positive_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_positive_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesPositive_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_positive_L_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsPositive_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_positive_L_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsPositive_L_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_positive_L_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsPositive_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAveragePositive_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetivePositive_L_NRt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L Rt Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_positive_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_positive_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesPositive_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_positive_NL_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsPositive_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_positive_NL_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsPositive_NL_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_positive_NL_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsPositive_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAveragePositive_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetivePositive_NL_Rt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L !Rt Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_positive_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_positive_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesPositive_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_positive_L_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsPositive_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_positive_L_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsPositive_L_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_positive_L_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsPositive_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAveragePositive_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetivePositive_L_NRt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L Rt !Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_positive_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_positive_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesPositive_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_positive_L_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsPositive_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_positive_L_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsPositive_L_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_positive_L_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsPositive_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAveragePositive_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetivePositive_L_Rt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L Rt Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_positive_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_positive_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesPositive_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_positive_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsPositive_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_positive_L_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsPositive_L_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_positive_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsPositive_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAveragePositive_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetivePositive_L_Rt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L Rt Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_positive_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_positive_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesPositive_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_positive_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsPositive_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_positive_NL_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsPositive_NL_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_positive_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsPositive_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAveragePositive_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetivePositive_NL_Rt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L Rt !Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_positive_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_positive_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesPositive_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_positive_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsPositive_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_positive_L_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsPositive_L_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_positive_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsPositive_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAveragePositive_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetivePositive_L_Rt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L !Rt Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_positive_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_positive_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesPositive_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_positive_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsPositive_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_positive_L_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsPositive_L_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_positive_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsPositive_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAveragePositive_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetivePositive_L_NRt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L Rt Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_positive_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_positive_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesPositive_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_positive_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsPositive_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_positive_L_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsPositive_L_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_positive_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsPositive_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAveragePositive_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetivePositive_L_Rt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh" colspan="2">Soma</td>
+          <td class="tg-baqh">{{sum_freq_positive}}</td>
+          <td class="tg-baqh">{{sum_average_likes_positive}}</td>
+          <td class="tg-baqh">{{sumMaxLikesPositive}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_positive}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsPositive}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_positive}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsWithCommentsPositive}}</td>
+          <td class="tg-baqh">{{sum_average_comments_positive}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsPositive}}</td>
+          <td class="tg-baqh">{{sumAverageOfAveragePositive}}</td>
+          <td class="tg-baqh">{{sumMobEfetivePositive}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>* Dados rotulados por Sentimento Neutro e Sequência</p>
+    <table class="tg marginTop">
+      <thead>
+        <tr>
+          <th class="tg-baqh">Sentimento<br /></th>
+          <th class="tg-baqh">Sequência</th>
+          <th class="tg-baqh">Frequência</th>
+          <th class="tg-baqh">Média de L</th>
+          <th class="tg-baqh">Máximo de L</th>
+          <th class="tg-baqh">Média de Rt</th>
+          <th class="tg-baqh">Máximo de Rt</th>
+          <th class="tg-baqh">Média de Rtk</th>
+          <th class="tg-baqh">Máximo de RtK</th>
+          <th class="tg-baqh">Média de K</th>
+          <th class="tg-baqh">Máximo de K</th>
+          <th class="tg-baqh">Média das Médias</th>
+          <th class="tg-baqh">Mob. Ef. da Sequencia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tg-nrix" rowspan="16">Neutro</td>
+          <td class="tg-baqh">!L !Rt !Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_neutral_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_neutral_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNeutral_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_neutral_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsNeutral_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_neutral_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNeutral_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_neutral_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsNeutral_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNeutral_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNeutral_NL_NRt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L !Rt !Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_neutral_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_neutral_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNeutral_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_neutral_NL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsNeutral_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_neutral_NL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNeutral_NL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_neutral_NL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsNeutral_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNeutral_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNeutral_NL_NRt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L !Rt Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_neutral_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_neutral_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNeutral_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_neutral_NL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsNeutral_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_neutral_NL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNeutral_NL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_neutral_NL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsNeutral_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNeutral_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNeutral_NL_NRt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L Rt !Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_neutral_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_neutral_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNeutral_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_neutral_NL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsNeutral_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_neutral_NL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNeutral_NL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_neutral_NL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsNeutral_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNeutral_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNeutral_NL_Rt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L !Rt !Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_neutral_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_neutral_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNeutral_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_neutral_L_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsNeutral_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_neutral_L_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNeutral_L_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_neutral_L_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsNeutral_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNeutral_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNeutral_L_NRt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L !Rt Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_neutral_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_neutral_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNeutral_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_neutral_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsNeutral_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_neutral_NL_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNeutral_NL_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_neutral_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsNeutral_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNeutral_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNeutral_NL_NRt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L Rt !Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_neutral_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_neutral_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNeutral_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_neutral_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsNeutral_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_neutral_NL_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNeutral_NL_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_neutral_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsNeutral_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNeutral_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNeutral_NL_Rt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L !Rt !Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_neutral_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_neutral_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNeutral_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_neutral_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsNeutral_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_neutral_L_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNeutral_L_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_neutral_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsNeutral_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNeutral_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNeutral_L_NRt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L Rt Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_neutral_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_neutral_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNeutral_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_neutral_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsNeutral_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_neutral_NL_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNeutral_NL_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_neutral_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsNeutral_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNeutral_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNeutral_NL_Rt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L !Rt Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_neutral_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_neutral_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNeutral_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_neutral_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsNeutral_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_neutral_L_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNeutral_L_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_neutral_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsNeutral_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNeutral_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNeutral_L_NRt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L Rt !Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_neutral_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_neutral_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNeutral_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_neutral_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsNeutral_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_neutral_L_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNeutral_L_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_neutral_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsNeutral_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNeutral_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNeutral_L_Rt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L Rt Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_neutral_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_neutral_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNeutral_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_neutral_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsNeutral_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_neutral_L_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNeutral_L_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_neutral_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsNeutral_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNeutral_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNeutral_L_Rt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L Rt Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_neutral_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_neutral_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNeutral_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_neutral_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsNeutral_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_neutral_NL_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNeutral_NL_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_neutral_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsNeutral_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNeutral_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNeutral_NL_Rt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L Rt !Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_neutral_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_neutral_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNeutral_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_neutral_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsNeutral_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_neutral_L_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNeutral_L_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_neutral_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsNeutral_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNeutral_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNeutral_L_Rt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L !Rt Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_neutral_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_neutral_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNeutral_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_neutral_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsNeutral_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_neutral_L_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNeutral_L_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_neutral_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsNeutral_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNeutral_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNeutral_L_NRt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L Rt Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_neutral_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_neutral_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNeutral_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_neutral_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsNeutral_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_neutral_L_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNeutral_L_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_neutral_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsNeutral_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNeutral_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNeutral_L_Rt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh" colspan="2">Soma</td>
+          <td class="tg-baqh">{{sum_freq_neutral}}</td>
+          <td class="tg-baqh">{{sum_average_likes_neutral}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNeutral}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_neutral}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsNeutral}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_neutral}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsWithCommentsNeutral}}</td>
+          <td class="tg-baqh">{{sum_average_comments_neutral}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsNeutral}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNeutral}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNeutral}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>* Dados rotulados por Sentimento Negativo e Sequência</p>
+    <table class="tg marginTop">
+      <thead>
+        <tr>
+          <th class="tg-baqh">Sentimento<br /></th>
+          <th class="tg-baqh">Sequência</th>
+          <th class="tg-baqh">Frequência</th>
+          <th class="tg-baqh">Média de L</th>
+          <th class="tg-baqh">Máximo de L</th>
+          <th class="tg-baqh">Média de Rt</th>
+          <th class="tg-baqh">Máximo de Rt</th>
+          <th class="tg-baqh">Média de Rtk</th>
+          <th class="tg-baqh">Máximo de RtK</th>
+          <th class="tg-baqh">Média de K</th>
+          <th class="tg-baqh">Máximo de K</th>
+          <th class="tg-baqh">Média das Médias</th>
+          <th class="tg-baqh">Mob. Ef. da Sequencia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tg-nrix" rowspan="16">Negativo</td>
+          <td class="tg-baqh">!L !Rt !Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_negative_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_negative_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNegative_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_negative_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsNegative_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_negative_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNegative_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_negative_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsNegative_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sumAverageOfAverageNegative_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMobEfetiveNegative_NL_NRt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L !Rt !Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_negative_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_negative_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNegative_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_negative_NL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsNegative_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_negative_NL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNegative_NL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_negative_NL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsNegative_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNegative_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNegative_NL_NRt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L !Rt Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_negative_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_negative_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNegative_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_negative_NL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsNegative_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_negative_NL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNegative_NL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_negative_NL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsNegative_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNegative_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNegative_NL_NRt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L Rt !Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_negative_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_negative_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNegative_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_negative_NL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsNegative_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_negative_NL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNegative_NL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_negative_NL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsNegative_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNegative_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNegative_NL_Rt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L !Rt !Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_negative_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_negative_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNegative_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_negative_L_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsNegative_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_negative_L_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNegative_L_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_negative_L_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsNegative_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNegative_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNegative_L_NRt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L !Rt Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_negative_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_negative_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNegative_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_negative_NL_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsNegative_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_negative_NL_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNegative_NL_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_negative_NL_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsNegative_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNegative_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNegative_NL_NRt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L Rt !Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_negative_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_negative_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNegative_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_negative_NL_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsNegative_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_negative_NL_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNegative_NL_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_negative_NL_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsNegative_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNegative_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNegative_NL_Rt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L !Rt !Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_negative_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_negative_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNegative_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_negative_L_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsNegative_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_negative_L_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNegative_L_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_negative_L_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsNegative_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNegative_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNegative_L_NRt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L Rt Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_negative_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_negative_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNegative_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_negative_NL_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsNegative_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_negative_NL_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNegative_NL_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_negative_NL_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsNegative_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNegative_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNegative_NL_Rt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L !Rt Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_negative_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_negative_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNegative_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_negative_L_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsNegative_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_negative_L_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNegative_L_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_negative_L_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsNegative_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNegative_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNegative_L_NRt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L Rt !Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_negative_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_negative_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNegative_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_negative_L_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsNegative_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_negative_L_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNegative_L_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_negative_L_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsNegative_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNegative_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNegative_L_Rt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L Rt Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_negative_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_likes_negative_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNegative_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_negative_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsNegative_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_negative_L_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNegative_L_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_negative_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsNegative_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNegative_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNegative_L_Rt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L Rt Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_negative_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_negative_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNegative_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_negative_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsNegative_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_negative_NL_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNegative_NL_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_negative_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsNegative_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNegative_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNegative_NL_Rt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L Rt !Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_negative_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_negative_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNegative_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_negative_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsNegative_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_negative_L_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNegative_L_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_negative_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsNegative_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNegative_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNegative_L_Rt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L !Rt Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_negative_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_negative_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNegative_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_negative_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsNegative_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_negative_L_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNegative_L_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_negative_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsNegative_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNegative_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNegative_L_NRt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L Rt Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_negative_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_negative_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNegative_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_negative_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsNegative_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_negative_L_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsNegative_L_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sum_average_comments_negative_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsNegative_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNegative_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNegative_L_Rt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh" colspan="2">Soma</td>
+          <td class="tg-baqh">{{sum_freq_negative}}</td>
+          <td class="tg-baqh">{{sum_average_likes_negative}}</td>
+          <td class="tg-baqh">{{sumMaxLikesNegative}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_negative}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsNegative}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_negative}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsWithCommentsNegative}}</td>
+          <td class="tg-baqh">{{sum_average_comments_negative}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsNegative}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageNegative}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveNegative}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>* Dados rotulados por Sentimento Não Classificado e Sequência</p>
+    <table class="tg marginTop">
+      <thead>
+        <tr>
+          <th class="tg-baqh">Sentimento<br /></th>
+          <th class="tg-baqh">Sequência</th>
+          <th class="tg-baqh">Frequência</th>
+          <th class="tg-baqh">Média de L</th>
+          <th class="tg-baqh">Máximo de L</th>
+          <th class="tg-baqh">Média de Rt</th>
+          <th class="tg-baqh">Máximo de Rt</th>
+          <th class="tg-baqh">Média de Rtk</th>
+          <th class="tg-baqh">Máximo de RtK</th>
+          <th class="tg-baqh">Média de K</th>
+          <th class="tg-baqh">Máximo de K</th>
+          <th class="tg-baqh">Média das Médias</th>
+          <th class="tg-baqh">Mob. Ef. da Sequencia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tg-nrix" rowspan="16">Não Classificado</td>
+          <td class="tg-baqh">!L !Rt !Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_unclassified_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_likes_unclassified_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxLikesUnclassified_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_unclassified_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsUnclassified_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_unclassified_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsUnclassified_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_unclassified_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsUnclassified_NL_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sumAverageOfAverageUnclassified_NL_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMobEfetiveUnclassified_NL_NRt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L !Rt !Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_unclassified_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_likes_unclassified_NL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxLikesUnclassified_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_unclassified_NL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsUnclassified_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_unclassified_NL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsUnclassified_NL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_unclassified_NL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsUnclassified_NL_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sumAverageOfAverageUnclassified_NL_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMobEfetiveUnclassified_NL_NRt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L !Rt Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_unclassified_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_likes_unclassified_NL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxLikesUnclassified_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_unclassified_NL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsUnclassified_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_unclassified_NL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsUnclassified_NL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_unclassified_NL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsUnclassified_NL_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sumAverageOfAverageUnclassified_NL_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMobEfetiveUnclassified_NL_NRt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L Rt !Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_unclassified_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_likes_unclassified_NL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxLikesUnclassified_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_unclassified_NL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsUnclassified_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_unclassified_NL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsUnclassified_NL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_unclassified_NL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsUnclassified_NL_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sumAverageOfAverageUnclassified_NL_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMobEfetiveUnclassified_NL_Rt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L !Rt !Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_unclassified_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_likes_unclassified_L_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxLikesUnclassified_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_unclassified_L_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsUnclassified_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_unclassified_L_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsUnclassified_L_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_unclassified_L_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsUnclassified_L_NRt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sumAverageOfAverageUnclassified_L_NRt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMobEfetiveUnclassified_L_NRt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L !Rt Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_unclassified_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_likes_unclassified_NL_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxLikesUnclassified_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_unclassified_NL_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsUnclassified_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_unclassified_NL_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsUnclassified_NL_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_unclassified_NL_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsUnclassified_NL_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sumAverageOfAverageUnclassified_NL_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMobEfetiveUnclassified_NL_NRt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L Rt !Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_unclassified_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_likes_unclassified_NL_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxLikesUnclassified_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_unclassified_NL_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsUnclassified_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_unclassified_NL_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsUnclassified_NL_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_unclassified_NL_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsUnclassified_NL_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sumAverageOfAverageUnclassified_NL_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMobEfetiveUnclassified_NL_Rt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L !Rt !Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_unclassified_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_likes_unclassified_L_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxLikesUnclassified_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_unclassified_L_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsUnclassified_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_unclassified_L_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsUnclassified_L_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_unclassified_L_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsUnclassified_L_NRt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sumAverageOfAverageUnclassified_L_NRt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMobEfetiveUnclassified_L_NRt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L Rt Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_unclassified_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_likes_unclassified_NL_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxLikesUnclassified_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_unclassified_NL_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsUnclassified_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_unclassified_NL_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsUnclassified_NL_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_unclassified_NL_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsUnclassified_NL_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sumAverageOfAverageUnclassified_NL_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMobEfetiveUnclassified_NL_Rt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L !Rt Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_unclassified_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_likes_unclassified_L_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxLikesUnclassified_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_unclassified_L_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsUnclassified_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_unclassified_L_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsUnclassified_L_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_unclassified_L_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsUnclassified_L_NRt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sumAverageOfAverageUnclassified_L_NRt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMobEfetiveUnclassified_L_NRt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L Rt !Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_unclassified_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_likes_unclassified_L_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxLikesUnclassified_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_unclassified_L_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsUnclassified_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_unclassified_L_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsUnclassified_L_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_unclassified_L_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsUnclassified_L_Rt_NRtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sumAverageOfAverageUnclassified_L_Rt_NRtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMobEfetiveUnclassified_L_Rt_NRtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L Rt Rtk !K</td>
+          <td class="tg-baqh">{{sum_freq_unclassified_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_likes_unclassified_L_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxLikesUnclassified_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_unclassified_L_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsUnclassified_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_unclassified_L_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsUnclassified_L_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_unclassified_L_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsUnclassified_L_Rt_Rtk_NK}}</td>
+          <td class="tg-baqh">
+            {{sumAverageOfAverageUnclassified_L_Rt_Rtk_NK}}
+          </td>
+          <td class="tg-baqh">{{sumMobEfetiveUnclassified_L_Rt_Rtk_NK}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">!L Rt Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_unclassified_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_likes_unclassified_NL_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxLikesUnclassified_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_unclassified_NL_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsUnclassified_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_unclassified_NL_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsUnclassified_NL_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_unclassified_NL_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsUnclassified_NL_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sumAverageOfAverageUnclassified_NL_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMobEfetiveUnclassified_NL_Rt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L Rt !Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_unclassified_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_likes_unclassified_L_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxLikesUnclassified_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_unclassified_L_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsUnclassified_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_unclassified_L_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsUnclassified_L_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_unclassified_L_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsUnclassified_L_Rt_NRtk_K}}</td>
+          <td class="tg-baqh">
+            {{sumAverageOfAverageUnclassified_L_Rt_NRtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMobEfetiveUnclassified_L_Rt_NRtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L !Rt Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_unclassified_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_likes_unclassified_L_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxLikesUnclassified_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_unclassified_L_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsUnclassified_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_unclassified_L_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsUnclassified_L_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_unclassified_L_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsUnclassified_L_NRt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sumAverageOfAverageUnclassified_L_NRt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMobEfetiveUnclassified_L_NRt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh">L Rt Rtk K</td>
+          <td class="tg-baqh">{{sum_freq_unclassified_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sum_average_likes_unclassified_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">{{sumMaxLikesUnclassified_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_unclassified_L_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsUnclassified_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_unclassified_L_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sumMaxRetweetsWithCommentsUnclassified_L_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">
+            {{sum_average_comments_unclassified_L_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMaxCommentsUnclassified_L_Rt_Rtk_K}}</td>
+          <td class="tg-baqh">
+            {{sumAverageOfAverageUnclassified_L_Rt_Rtk_K}}
+          </td>
+          <td class="tg-baqh">{{sumMobEfetiveUnclassified_L_Rt_Rtk_K}}</td>
+        </tr>
+        <tr>
+          <td class="tg-baqh" colspan="2">Soma</td>
+          <td class="tg-baqh">{{sum_freq_unclassified}}</td>
+          <td class="tg-baqh">{{sum_average_likes_unclassified}}</td>
+          <td class="tg-baqh">{{sumMaxLikesUnclassified}}</td>
+          <td class="tg-baqh">{{sum_average_retweets_unclassified}}</td>
+          <td class="tg-baqh">{{sumMaxRetweetsUnclassified}}</td>
+          <td class="tg-baqh">
+            {{sum_average_retweets_with_comments_unclassified}}
+          </td>
+          <td class="tg-baqh">{{sumMaxRetweetsWithCommentsUnclassified}}</td>
+          <td class="tg-baqh">{{sum_average_comments_unclassified}}</td>
+          <td class="tg-baqh">{{sumMaxCommentsUnclassified}}</td>
+          <td class="tg-baqh">{{sumAverageOfAverageUnclassified}}</td>
+          <td class="tg-baqh">{{sumMobEfetiveUnclassified}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>* Resultado da Apuração do Capital Social Bourdieusiano</p>
+    <table class="tg">
+      <thead>
+        <tr>
+          <th class="tg-baqh">Perfil</th>
+          <th class="tg-baqh" style="width: 15%">
+            Número de interações sociais capturadas
+          </th>
+          <th class="tg-baqh">Número de Seguidores</th>
+          <th class="tg-baqh">vCSB</th>
+          <th class="tg-baqh">vCSB(positivo)</th>
+          <th class="tg-baqh">vCSB(neutro)</th>
+          <th class="tg-baqh">vCSB(negativo)</th>
+          <th class="tg-baqh">vCSB(não-classificado)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tg-0lax">@{{profileId}}</td>
+          <td class="tg-0lax">{{numCollectedTweets}}</td>
+          <td class="tg-0lax">{{followers}}</td>
+          <td class="tg-0lax">{{sumCapitalSocialBourdiesian}}</td>
+          <td class="tg-0lax">{{sumCapitalSocialBourdiesianPositive}}</td>
+          <td class="tg-0lax">{{sumCapitalSocialBourdiesianNeutral}}</td>
+          <td class="tg-0lax">{{sumCapitalSocialBourdiesianNegative}}</td>
+          <td class="tg-0lax">{{sumCapitalSocialBourdiesianNonClass}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

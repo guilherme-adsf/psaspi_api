@@ -1,0 +1,18 @@
+{
+  "type": "mysql",
+  "host": "DATABASE_HOST",
+  "port": 3306,
+  "username": "DATABASE_USERNAME",
+  "password": "DATABASE_PASSWORD",
+  "database": "coletas",
+  "synchronize": true,
+  "logging": false,
+  "entities": ["./src/entity/**/*.ts"],
+  "migrations": ["./src/migration/**/*.ts"],
+  "subscribers": ["./src/subscriber/**/*.ts"],
+  "cli": {
+    "entitiesDir": "./src/entity",
+    "migrationsDir": "./src/migration",
+    "subscribersDir": "./src/subscriber"
+  }
+}

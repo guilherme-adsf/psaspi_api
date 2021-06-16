@@ -1,0 +1,6 @@
+id,collectionId,profileId,tweetId,sentiment,likes,retweets,retweetsWithComments,comments,gspSequence
+11,34,usponline,1332882459206279169,positive,0,5,2,,!L Rt Rtk
+12,34,usponline,1332882348610887682,positive,0,33,9,,!L Rt Rtk
+13,34,usponline,1332699629197070336,positive,0,17,2,,!L Rt Rtk
+14,34,usponline,1332689286198681600,positive,0,4,0,,!L Rt !Rtk
+15,34,usponline,1332429237723152385,neutral,4,0,0,,L !Rt !Rtk
